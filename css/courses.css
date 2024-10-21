@@ -114,49 +114,100 @@ h2 {
     background-color: #007BFF;
 }
 
+/* Dark Mode Styles */
+.dark-mode #courses {
+    background-color: #1a1a1a;
+}
+
+.dark-mode h2 {
+    color: #f0f0f0;
+}
+
+.dark-mode .featured-course {
+    background-color: #333;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .featured-content h3 {
+    color: #4da3ff;
+}
+
+.dark-mode .featured-content p {
+    color: #ccc;
+}
+
+.dark-mode .cta-btn {
+    background-color: #4da3ff;
+}
+
+.dark-mode .cta-btn:hover {
+    background-color: #3a7ac0;
+}
+
+.dark-mode .course-item {
+    background-color: #333;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .course-item h3 {
+    color: #4da3ff;
+}
+
+.dark-mode .course-item p {
+    color: #ccc;
+}
+
+.dark-mode .btn-secondary {
+    background-color: #4da3ff;
+}
+
+.dark-mode .btn-secondary:hover {
+    background-color: #3a7ac0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     h2 {
-        font-size: 2rem; /* Smaller heading */
+        font-size: 2rem;
     }
 
     .featured-course {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem; /* Less padding on mobile */
+        padding: 1.5rem;
     }
 
     .featured-content h3 {
-        font-size: 1.5rem; /* Smaller course title */
+        font-size: 1.5rem;
     }
 
     .featured-content p {
-        font-size: 1rem; /* Smaller course description */
+        font-size: 1rem;
     }
 
     .featured-image img {
-        max-width: 80%; /* Reduce image size */
+        max-width: 80%;
         margin-top: 1rem;
     }
 
     .course-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust grid for smaller items */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
     .course-item {
-        padding: 1.5rem; /* Less padding on course items */
+        padding: 1.5rem;
     }
 
     .course-item h3 {
-        font-size: 1.2rem; /* Smaller course item title */
+        font-size: 1.2rem;
     }
 
     .course-item p {
-        font-size: 0.9rem; /* Smaller course item description */
+        font-size: 0.9rem;
     }
 
     .btn-secondary {
-        font-size: 0.9rem; /* Smaller button text */
+        font-size: 0.9rem;
     }
 }
 

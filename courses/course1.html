@@ -5,26 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Page</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f7f7f7;
+            background-color: #f0f0f0;
+            color: #333;
         }
         
-        /* Container */
+        /* Navigation Bar */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
         .container {
-            max-width: 800px;
-            margin: 50px auto;
+            max-width: 900px;
+            margin: 100px auto;
             padding: 2rem;
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
             animation: fadeIn 1s ease-out;
         }
 
-        /* Heading */
         h1 {
             font-size: 2.5rem;
             color: #333;
@@ -32,28 +49,30 @@
             animation: fadeInDown 1.2s ease-out;
         }
         
-        /* Description */
         p {
-            font-size: 1.1rem;
-            color: #555;
+            font-size: 1.2rem;
+            color: #666;
             margin-bottom: 2rem;
             animation: fadeInUp 1.5s ease-out;
         }
 
-        /* Video */
         video {
             display: block;
             margin: 0 auto 20px;
             width: 100%;
-            border: 2px solid #ddd;
+            border: none;
             border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             animation: fadeInUp 1.3s ease-out;
         }
 
-        /* Certificate Button */
-        #certificate-btn {
-            display: none; /* Initially hidden */
-            padding: 10px 20px;
+        #quiz-section, #certificate-btn, #go-back-btn, .name-input {
+            display: none;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        button {
+            padding: 12px 25px;
             font-size: 1.1rem;
             color: white;
             background-color: #007bff;
@@ -61,47 +80,31 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            animation: fadeInUp 1.5s ease-out;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        #certificate-btn:hover {
+        button:hover {
             background-color: #0056b3;
         }
 
-        /* Go Back Button */
         #go-back-btn {
-            display: none; /* Initially hidden */
-            padding: 10px 20px;
-            font-size: 1.1rem;
-            color: white;
-            background-color: #dc3545; /* Red color for go back button */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            animation: fadeInUp 1.5s ease-out;
+            background-color: #dc3545;
         }
 
         #go-back-btn:hover {
-            background-color: #c82333;
-        }
-
-        /* Name Input Section */
-        .name-input {
-            display: none;
-            text-align: center;
-            margin-bottom: 20px;
-            animation: fadeInUp 1.5s ease-out;
+            background-color: #b22a38;
         }
 
         .name-input input {
-            padding: 10px;
-            font-size: 1.1rem;
+            padding: 12px;
+            font-size: 1.2rem;
             width: 80%;
             max-width: 400px;
             margin-bottom: 1rem;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
             transition: border-color 0.3s ease;
         }
 
@@ -110,20 +113,99 @@
             outline: none;
         }
 
-        .name-input button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1.1rem;
+        #quiz-section {
+            text-align: left;
+            margin-top: 20px;
         }
 
-        .name-input button:hover {
-            background-color: #0056b3;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.5);
+        .question {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .question p {
+            color: #333;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        label {
+            display: block;
+            padding: 8px 0;
+            color: #666;
+        }
+
+        form {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Advertisement Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: popIn 0.5s ease-in-out;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 4px solid #ff0000;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 0.5s ease-in-out;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .modal-content button {
+            margin-top: 20px;
+            background-color: #28a745;
+        }
+
+        .modal-content button:hover {
+            background-color: #218838;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #ff0000;
+        }
+
+        .close-btn:hover {
+            color: #cc0000;
         }
 
         /* Animations */
@@ -132,78 +214,210 @@
             to { opacity: 1; }
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 1.5rem;
-            }
-
-            .name-input input {
-                font-size: 1rem;
-            }
+            h1 { font-size: 2rem; }
+            .container { padding: 1.5rem; }
+            .name-input input { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="/index.html">Home</a>
+    </div>
+
+    <!-- Main Container -->
     <div class="container">
         <h1>Course Title: Disaster Management 101</h1>
-        <p>Watch the full video to unlock your certificate.</p>
+        <p>Watch the full video to unlock the quiz. Score 75% or above to get your certificate.</p>
         <video id="course-video" width="600" height="400" controls playsinline>
             <source src="/images/disaster preparedness.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        <div class="name-input" id="name-input">
-            <input type="text" id="user-name" placeholder="Enter your name" />
+        <div id="quiz-section">
+            <h2>Quiz</h2>
+            <form id="quiz-form">
+                <div class="question">
+                    <p>1. What is the first step in disaster management?</p>
+                    <label><input type="radio" name="q1" value="a"> a) Response</label>
+                    <label><input type="radio" name="q1" value="b"> b) Recovery</label>
+                    <label><input type="radio" name="q1" value="c"> c) Preparedness</label>
+                    <label><input type="radio" name="q1" value="d"> d) Mitigation</label>
+                </div>
+                <div class="question">
+                    <p>2. Which of the following is NOT a type of natural disaster?</p>
+                    <label><input type="radio" name="q2" value="a"> a) Earthquake</label>
+                    <label><input type="radio" name="q2" value="b"> b) Hurricane</label>
+                    <label><input type="radio" name="q2" value="c"> c) Wildfire</label>
+                    <label><input type="radio" name="q2" value="d"> d) Cybercrime</label>
+                </div>
+                <div class="question">
+                    <p>3. What should be included in a basic emergency kit?</p>
+                    <label><input type="radio" name="q3" value="a"> a) Water and non-perishable food</label>
+                    <label><input type="radio" name="q3" value="b"> b) Flashlight and batteries</label>
+                    <label><input type="radio" name="q3" value="c"> c) First aid supplies</label>
+                    <label><input type="radio" name="q3" value="d"> d) All of the above</label>
+                </div>
+                <div class="question">
+                    <p>4. Which agency oversees disaster management in the U.S.?</p>
+                    <label><input type="radio" name="q4" value="a"> a) Federal Emergency Management Agency (FEMA)</label>
+                    <label><input type="radio" name="q4" value="b"> b) Department of Homeland Security (DHS)</label>
+                    <label><input type="radio" name="q4" value="c"> c) Red Cross</label>
+                    <label><input type="radio" name="q4" value="d"> d) Federal Earthquake Mitigation Agency</label>
+                </div>
+                
+                <div class="question">
+                    <p>5. During an earthquake, the safest practice is to:</p>
+                    <label><input type="radio" name="q5" value="a"> a) Run outside immediately in hurry</label>
+                    <label><input type="radio" name="q5" value="b"> b) Stand near a window </label>
+                    <label><input type="radio" name="q5" value="c"> c) Drop, cover, and hold on</label>
+                    <label><input type="radio" name="q5" value="d"> d) Use elevator to leave the building</label>
+                </div>
+                <div class="question">
+                    <p>6. What is the primary reason for turning off utilities like gas during an emergency?</p>
+                    <label><input type="radio" name="q6" value="a"> a) To prevent theft </label>
+                    <label><input type="radio" name="q6" value="b"> b) To conserve resources </label>
+                    <label><input type="radio" name="q6" value="c"> c) To reduce the risk of fire or explosion </label>
+                    <label><input type="radio" name="q6" value="d"> d) To prepare for power outages </label>
+                </div>
+                <div class="question">
+                    <p>7. Which of the following is most helpful for tracking and receiving disaster alerts?</p>
+                    <label><input type="radio" name="q7" value="a"> a) Radio apps</label>
+                    <label><input type="radio" name="q7" value="b"> b) Government websites </label>
+                    <label><input type="radio" name="q7" value="c"> c) Emergency alert apps and weather radios</label>
+                    <label><input type="radio" name="q7" value="d"> d) News channels only </label>
+                </div>
+                <div class="question">
+                    <p>8. If you are instructed to “shelter in place”, what should you do?</p>
+                    <label><input type="radio" name="q8" value="a"> a)  Leave your home and head to the nearest shelter
+                    </label>
+                    <label><input type="radio" name="q8" value="b"> b)  Stay indoors and seal windows and doors </label>
+                    <label><input type="radio" name="q8" value="c"> c)  Gather outside with neighbors radios</label>
+                    <label><input type="radio" name="q8" value="d"> d)  Move all your belongings to a safe place </label>
+                </div>
+                <div class="question">
+                    <p>9. Which is the first priority when evacuating during a disaster?</p>
+                    <label><input type="radio" name="q9" value="a"> a) Protecting yourself and your family</label>
+                    <label><input type="radio" name="q9" value="b"> b) Taking all valuables with you </label>
+                    <label><input type="radio" name="q9" value="c"> c) Ensuring pets are left behind</label>
+                    <label><input type="radio" name="q9" value="d"> d) Driving as fast as possible </label>
+                </div>
+                <div class="question">
+                    <p>10. What should you do if a fire breaks out and smoke fills your home?</p>
+                    <label><input type="radio" name="q10" value="a"> a)  Open all windows for ventilation
+                    </label>
+                    <label><input type="radio" name="q10" value="b"> b)  Stay indoors and seal windows and doors </label>
+                    <label><input type="radio" name="q10" value="c"> c)  Gather outside with neighbors radios</label>
+                    <label><input type="radio" name="q10" value="d"> d) Crawl low under the smoke to exit </label>
+                </div>
+                <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+            </form>
+        </div>
+
+        <div id="name-input" class="name-input">
+            <input type="text" id="user-name" placeholder="Enter your name to generate the certificate">
             <button onclick="generateCertificate()">Generate Certificate</button>
         </div>
 
         <button id="certificate-btn" onclick="showNameInput()">Download Certificate</button>
-        <button id="go-back-btn" onclick="goBack()">Go Back</button> <!-- Go Back Button -->
+        <button id="go-back-btn" onclick="goBack()">Go Back</button>
     </div>
+
+    <!-- The Modal (Advertisement Style) -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Congratulations!</h2>
+            <p>You scored 75% or above. You can now download your certificate.</p>
+            <button onclick="showNameInput(); closeModal()">Download Certificate</button>
+        </div>
+    </div>
+
+    <div id="quizModal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>You scored below 75%. </h2>
+            <p>try again to be prepared for any disaster!</p>
+            <button onclick="closeModal2()">Try Again</button>
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         const video = document.getElementById('course-video');
+        const quizSection = document.getElementById('quiz-section');
         const certificateBtn = document.getElementById('certificate-btn');
-        const goBackBtn = document.getElementById('go-back-btn'); // Go Back Button
+        const goBackBtn = document.getElementById('go-back-btn');
         const nameInputDiv = document.getElementById('name-input');
+        const quizModal = document.getElementById('quizModal');
         
-        // Flag to check if the certificate has been generated
         let certificateGenerated = false;
 
-        // Show the name input field when the user clicks the certificate button
+        video.onended = function() {
+            quizSection.style.display = 'block';
+            goBackBtn.style.display = 'inline-block';
+        };
+
+        function submitQuiz() {
+            const form = document.getElementById('quiz-form');
+            const answers = ['c', 'd', 'd', 'a', 'c', 'c', 'c', 'b', 'a', ];
+            let score = 0;
+
+            for (let i = 1; i <= 4; i++) {
+                const selectedAnswer = form.elements['q' + i].value;
+                if (selectedAnswer === answers[i - 1]) {
+                    score++;
+                }
+            }
+
+            const percentage = (score / 10) * 100;
+            
+            if (percentage >= 75) {
+                openModal();
+            } else {
+                openModal2();            }
+        }
+
         function showNameInput() {
             nameInputDiv.style.display = 'block';
             certificateBtn.style.display = 'none';
-            goBackBtn.style.display = 'inline-block'; // Show go back button when generating certificate
         }
 
-        // Display the certificate button and go back button when the video finishes
-        video.onended = function() {
-            certificateBtn.style.display = 'inline-block'; // Show the button when video ends
-            goBackBtn.style.display = 'inline-block'; // Show Go Back button when video ends
-        };
+        function openModal() {
+            quizModal.style.display = 'block';
+        }
+        
+        function openModal2() {
+            quizModal2.style.display = 'block';
+        }
 
-        // Function to generate the certificate
+        function closeModal() {
+            quizModal.style.display = 'none';
+        }
+        
+        function closeModal2() {
+            quizModal.style.display = 'none';
+            window.location.reload()
+        }
+
         function generateCertificate() {
             if (certificateGenerated) {
                 alert('You have already generated your certificate.');
-                return; // Exit if certificate is already generated
+                return;
             }
 
             const userName = document.getElementById('user-name').value;
@@ -216,30 +430,21 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Load the certificate template image
             const img = new Image();
-            img.src = '/images/certificate.png';  // Replace with the path to your certificate template image
+            img.src = '/images/certificate.png';
 
             img.onload = function() {
-                // Draw the certificate template on the PDF
-                doc.addImage(img, 'JPEG', 0, 0, 210, 297);  // Adjust width (210) and height (297) for A4 size
-
-                // Add the user's name on top of the template
+                doc.addImage(img, 'JPEG', 0, 0, 210, 297);
                 doc.setFontSize(24);
                 doc.setTextColor(50, 50, 50);
-                doc.text(userName, 105, 150, null, null, 'center');  // Adjust position to match where the name should go
-
-                // Save the PDF
+                doc.text(userName, 105, 150, null, null, 'center');
                 doc.save('Certificate-' + userName + '.pdf');
-
-                // Set the flag to true to prevent further downloads
                 certificateGenerated = true;
             };
         }
 
-        // Function to go back to the previous page
         function goBack() {
-            window.history.back(); // Go back to the previous page
+            window.history.back();
         }
     </script>
 </body>

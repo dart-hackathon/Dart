@@ -303,3 +303,140 @@ footer p {
     transform: translateY(0);
   }
 }
+
+/* Existing styles... */
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+/* Intro Section with Crypto Design */
+.dark-mode .crypto-design {
+  background: linear-gradient(135deg, #071a36, #080d21);
+}
+
+.dark-mode .crypto-design h2 {
+  color: #f0f0f0;
+}
+
+.dark-mode .crypto-design p {
+  color: #d9e6f7;
+}
+
+.dark-mode .btn-start {
+  background-color: #17a865;
+  color: #f0f0f0;
+}
+
+.dark-mode .btn-start:hover {
+  background-color: #1fcf7c;
+  box-shadow: 0 4px 15px rgba(31, 207, 124, 0.5);
+}
+
+/* Featured Section */
+.dark-mode .featured-section {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .featured-section h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .featured-item {
+  background-color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .featured-item h4 {
+  color: #4da3ff;
+}
+
+.dark-mode .featured-item p {
+  color: #ccc;
+}
+
+.dark-mode .btn-featured {
+  background-color: #4da3ff;
+}
+
+.dark-mode .btn-featured:hover {
+  background-color: #3281d8;
+}
+
+/* Quick Access Section */
+.dark-mode .quick-access {
+  background-color: #222;
+}
+
+.dark-mode .quick-access h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .quick-access-grid {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .quick-access-item {
+  background-color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .quick-access-item h4 {
+  color: #4da3ff;
+}
+
+.dark-mode .quick-access-item p {
+  color: #ccc;
+}
+
+/* Disaster Map Section */
+.dark-mode .disaster-map {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .disaster-map h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .map-container {
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .disaster-map p {
+  color: #ccc;
+}
+
+/* Testimonials Section */
+.dark-mode .testimonials {
+  background-color: #222;
+}
+
+.dark-mode .testimonials h3 {
+  color: #f0f0f0;
+}
+
+.dark-mode .testimonial-item {
+  background-color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .testimonial-item p {
+  color: #f0f0f0;
+}
+
+.dark-mode .testimonial-item cite {
+  color: #4da3ff;
+}
+
+/* Footer */
+.dark-mode footer {
+  background-color: #1a1a1a;
+}
+
+.dark-mode .social-icons a:hover {
+  color: #4da3ff;
+}
+
+/* Existing responsive design and animations... */

@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructions</title>
     <style>
+        /* Default Light Mode Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f7f7f7;
+            color: #333;
         }
 
         /* Container */
@@ -27,7 +29,6 @@
         /* Heading */
         h1 {
             font-size: 2.5rem;
-            color: #333;
             margin-bottom: 1rem;
             animation: fadeInDown 1.2s ease-out;
         }
@@ -44,7 +45,6 @@
         }
 
         ul li {
-            color: black;
             padding: 15px;
             margin-bottom: 10px;
             border-radius: 50px;
@@ -113,6 +113,42 @@
             .nav-button,
             .prev-button {
                 font-size: 1rem;
+            }
+        }
+
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+
+            .container {
+                background-color: #1e1e1e;
+                box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            }
+
+            ul {
+                border: 1px solid #444;
+            }
+
+            ul li {
+                background-color: #333;
+                color: #ffffff;
+            }
+
+            .nav-button,
+            .prev-button {
+                background-color: #007bff;
+            }
+
+            .nav-button:hover,
+            .prev-button:hover {
+                background-color: #0056b3;
+            }
+
+            footer {
+                color: #bbb;
             }
         }
     </style>
