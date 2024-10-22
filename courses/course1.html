@@ -336,6 +336,36 @@
             border-color: #1a73e8;
         }
 
+        .submit-button {
+            display: block;
+            margin: 2rem auto;
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: auto;
+            min-width: 160px;
+        }
+
+        .submit-button:hover {
+            background-color: #1557b0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .submit-button {
+            background-color: #2196f3;
+        }
+
+        .dark-mode .submit-button:hover {
+            background-color: #1976d2;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .hamburger {
@@ -411,12 +441,12 @@
             <h1>DART</h1>
             <div class="hamburger">&#9776;</div>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="disasters.html">Disasters</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="prepare.html">Prepare</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/disasters.html">Disasters</a></li>
+                <li><a href="/courses.html">Courses</a></li>
+                <li><a href="/prepare.html">Prepare</a></li>
+                <li><a href="/faq.html">FAQ</a></li>
+                <li><a href="/contact.html">Contact</a></li>
                 <li><a href="#" id="darkModeToggle" onclick="toggleDarkMode()">
                     <i class="fas fa-moon"></i> Dark Mode
                 </a></li>
@@ -436,6 +466,80 @@
         <div id="quiz-section">
             <form id="quiz-form">
                 <!-- Add your quiz questions here -->
+                <div class="question">
+                    <p>1. What is defined as a serious disruption of community or society functioning?</p>
+                    <label><input type="radio" name="q1" value="a"> a) Emergency</label>
+                    <label><input type="radio" name="q1" value="b"> b) Disaster</label>
+                    <label><input type="radio" name="q1" value="c"> c) Catastrophe</label>
+                    <label><input type="radio" name="q1" value="d"> d) Crisis</label>
+                </div>
+                <div class="question">
+                    <p>2. Which of the following is NOT a component of disaster management?</p>
+                    <label><input type="radio" name="q2" value="a"> a) Preparedness</label>
+                    <label><input type="radio" name="q2" value="b"> b) Recovery</label>
+                    <label><input type="radio" name="q2" value="c"> c) Response</label>
+                    <label><input type="radio" name="q2" value="d"> d) Evaluation</label>
+                </div>
+                <div class="question">
+                    <p>3. The Disaster Management Act was enacted in which year?</p>
+                    <label><input type="radio" name="q3" value="a"> a) 2000</label>
+                    <label><input type="radio" name="q3" value="b"> b) 2005</label>
+                    <label><input type="radio" name="q3" value="c"> c) 2010</label>
+                    <label><input type="radio" name="q3" value="d"> d) 2015</label>
+                </div>
+                <div class="question">
+                    <p>4. Which agency oversees disaster management in the U.S.?</p>
+                    <label><input type="radio" name="q4" value="a"> a) Federal Emergency Management Agency (FEMA)</label>
+                    <label><input type="radio" name="q4" value="b"> b) Department of Homeland Security (DHS)</label>
+                    <label><input type="radio" name="q4" value="c"> c) Red Cross</label>
+                    <label><input type="radio" name="q4" value="d"> d) Federal Earthquake Mitigation Agency</label>
+                </div>
+                
+                <div class="question">
+                    <p>5. During an earthquake, the safest practice is to:</p>
+                    <label><input type="radio" name="q5" value="a"> a) Run outside immediately in hurry</label>
+                    <label><input type="radio" name="q5" value="b"> b) Stand near a window </label>
+                    <label><input type="radio" name="q5" value="c"> c) Drop, cover, and hold on</label>
+                    <label><input type="radio" name="q5" value="d"> d) Use elevator to leave the building</label>
+                </div>
+                <div class="question">
+                    <p>6. What is the primary reason for turning off utilities like gas during an emergency?</p>
+                    <label><input type="radio" name="q6" value="a"> a) To prevent theft </label>
+                    <label><input type="radio" name="q6" value="b"> b) To conserve resources </label>
+                    <label><input type="radio" name="q6" value="c"> c) To reduce the risk of fire or explosion </label>
+                    <label><input type="radio" name="q6" value="d"> d) To prepare for power outages </label>
+                </div>
+                <div class="question">
+                    <p>7. Which of the following is most helpful for tracking and receiving disaster alerts?</p>
+                    <label><input type="radio" name="q7" value="a"> a) Radio apps</label>
+                    <label><input type="radio" name="q7" value="b"> b) Government websites </label>
+                    <label><input type="radio" name="q7" value="c"> c) Emergency alert apps and weather radios</label>
+                    <label><input type="radio" name="q7" value="d"> d) News channels only </label>
+                </div>
+                <div class="question">
+                    <p>8. If you are instructed to “shelter in place”, what should you do?</p>
+                    <label><input type="radio" name="q8" value="a"> a)  Leave your home and head to the nearest shelter
+                    </label>
+                    <label><input type="radio" name="q8" value="b"> b)  Stay indoors and seal windows and doors </label>
+                    <label><input type="radio" name="q8" value="c"> c)  Gather outside with neighbors radios</label>
+                    <label><input type="radio" name="q8" value="d"> d)  Move all your belongings to a safe place </label>
+                </div>
+                <div class="question">
+                    <p>9. Which is the first priority when evacuating during a disaster?</p>
+                    <label><input type="radio" name="q9" value="a"> a) Protecting yourself and your family</label>
+                    <label><input type="radio" name="q9" value="b"> b) Taking all valuables with you </label>
+                    <label><input type="radio" name="q9" value="c"> c) Ensuring pets are left behind</label>
+                    <label><input type="radio" name="q9" value="d"> d) Driving as fast as possible </label>
+                </div>
+                <div class="question">
+                    <p>10. What should you do if a fire breaks out and smoke fills your home?</p>
+                    <label><input type="radio" name="q10" value="a"> a)  Open all windows for ventilation
+                    </label>
+                    <label><input type="radio" name="q10" value="b"> b)  Stay indoors and seal windows and doors </label>
+                    <label><input type="radio" name="q10" value="c"> c)  Gather outside with neighbors radios</label>
+                    <label><input type="radio" name="q10" value="d"> d) Crawl low under the smoke to exit </label>
+                </div>
+                <button type="button" class="submit-button" onclick="submitQuiz()">Submit Quiz</button>
             </form>
         </div>
 
@@ -572,6 +676,45 @@
         function goBack() {
             window.history.back();
         }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('#darkModeToggle i');
+            
+            // Toggle dark mode class
+            body.classList.toggle('dark-mode');
+            
+            // Update icon
+            if (body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Check for saved dark mode preference
+        function checkDarkMode() {
+            const darkMode = localStorage.getItem('darkMode');
+            const icon = document.querySelector('#darkModeToggle i');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Call checkDarkMode when page loads
+        document.addEventListener('DOMContentLoaded', checkDarkMode);
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
     </script>
 </body>
 </html>
