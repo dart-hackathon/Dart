@@ -157,8 +157,11 @@
 
 /* Disaster Map Section */
 .disaster-map {
-  padding: 5rem 0;
-  background-color: #f8f9fa;
+  padding: 2rem ;
+  background-color: #0099ff;
+  margin-right: 10%;
+  margin-left: 10%;
+  border-radius: 20px;
 }
 
 .disaster-map h3 {
@@ -187,6 +190,45 @@
   text-align: center;
   color: #666;
   font-size: 1.1rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 5rem 0;
+  background-color: #fff;
+}
+
+.testimonials h3 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 3rem;
+}
+
+.testimonial-item {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-item p {
+  font-style: italic;
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.testimonial-item cite {
+  color: #007BFF;
+  font-weight: bold;
 }
 
 /* Testimonials Section */

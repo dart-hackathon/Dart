@@ -4,208 +4,406 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Reset and Base Styles */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            box-sizing: border-box;
         }
-        
-        /* Navigation Bar */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Navbar Styles */
         .navbar {
-            background-color: #007bff;
-            padding: 15px;
-            text-align: center;
+            background: linear-gradient(90deg, #007BFF, #00A6FF);
+            color: white;
+            padding: 15px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar a {
+        .dark-mode .navbar {
+            background: linear-gradient(90deg, #005bb9, #0077b3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-size: 1.8rem;
+            color: #fff;
+            animation: fadeInDown 0.5s ease-out;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 30px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        .navbar ul li a {
             color: white;
+            font-size: 1rem;
+            padding: 10px 15px;
             text-decoration: none;
-            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-radius: 5px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 100px auto;
-            padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            animation: fadeIn 1s ease-out;
+        .navbar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
         }
 
-        h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1.2s ease-out;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1.5s ease-out;
-        }
-
-        video {
-            display: block;
-            margin: 0 auto 20px;
-            width: 100%;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 1.3s ease-out;
-        }
-
-        #quiz-section, #certificate-btn, #go-back-btn, .name-input {
+        .hamburger {
             display: none;
-            animation: fadeInUp 1.5s ease-out;
-        }
-
-        button {
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            transition: color 0.3s ease;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        /* Main Container Styles */
+        .main-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-out;
         }
 
-        #go-back-btn {
-            background-color: #dc3545;
+        .dark-mode .main-container {
+            background-color: #2d2d2d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
 
-        #go-back-btn:hover {
-            background-color: #b22a38;
+        /* Content Styles */
+        .main-container h1 {
+            font-size: 2.5rem;
+            color: #1a1f36;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
         }
 
-        .name-input input {
-            padding: 12px;
-            font-size: 1.2rem;
-            width: 80%;
-            max-width: 400px;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
-            color: #333;
-            transition: border-color 0.3s ease;
+        .dark-mode .main-container h1 {
+            color: #f0f0f0;
         }
 
-        .name-input input:focus {
-            border-color: #007bff;
-            outline: none;
+        .main-container p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
+        .dark-mode .main-container p {
+            color: #d1d1d1;
+        }
+
+        /* Video Styles */
+        video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2.5rem;
+            background-color: #000;
+        }
+
+        /* Quiz Styles */
         #quiz-section {
-            text-align: left;
-            margin-top: 20px;
+            display: none;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        .dark-mode #quiz-section {
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .question {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #666;
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+
+        .dark-mode .question {
+            background-color: #363636;
+            border-color: #404040;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .question p {
-            color: #333;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .dark-mode .question p {
+            color: #f0f0f0;
+        }
+
+        .question label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .dark-mode .question label {
+            background-color: #404040;
+            border-color: #505050;
+            color: #f0f0f0;
+        }
+
+        .question label:hover {
+            background-color: #f1f5f9;
+        }
+
+        .dark-mode .question label:hover {
+            background-color: #505050;
         }
 
         input[type="radio"] {
-            margin-right: 10px;
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #1a73e8;
         }
 
-        label {
-            display: block;
-            padding: 8px 0;
-            color: #666;
+        /* Button Styles */
+        button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: auto;
+            min-width: 160px;
+            margin: 10px;
         }
 
-        form {
-            margin-top: 30px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        button:hover {
+            background-color: #1557b0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Advertisement Modal Styles */
+        #go-back-btn {
+            background-color: #ef4444;
+        }
+
+        #go-back-btn:hover {
+            background-color: #dc2626;
+        }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            animation: popIn 0.5s ease-in-out;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
         .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 20px;
-            border: 4px solid #ff0000;
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            animation: bounceIn 0.5s ease-in-out;
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 500px;
+            margin: 15% auto;
             position: relative;
+            text-align: center;
+            animation: slideInDown 0.3s ease-out;
         }
 
-        .modal-content h2 {
-            color: #333;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .modal-content p {
-            font-size: 1.2rem;
-            color: #666;
-        }
-
-        .modal-content button {
-            margin-top: 20px;
-            background-color: #28a745;
-        }
-
-        .modal-content button:hover {
-            background-color: #218838;
+        .dark-mode .modal-content {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
         }
 
         .close-btn {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 24px;
             cursor: pointer;
-            color: #ff0000;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .dark-mode .close-btn {
+            color: #999;
         }
 
         .close-btn:hover {
-            color: #cc0000;
+            color: #333;
+        }
+
+        .dark-mode .close-btn:hover {
+            color: #fff;
+        }
+
+        /* Certificate Input Styles */
+        #name-input {
+            display: none;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #name-input input {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .dark-mode #name-input input {
+            background-color: #404040;
+            border-color: #505050;
+            color: #f0f0f0;
+        }
+
+        #name-input input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .submit-button {
+            display: block;
+            margin: 2rem auto;
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: auto;
+            min-width: 160px;
+        }
+
+        .submit-button:hover {
+            background-color: #1557b0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .submit-button {
+            background-color: #2196f3;
+        }
+
+        .dark-mode .submit-button:hover {
+            background-color: #1976d2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: rgba(0, 123, 255, 0.9);
+                width: 100%;
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 20px;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+            }
+
+            .main-container {
+                margin: 80px 1rem;
+                padding: 1.5rem;
+            }
+
+            .navbar {
+                border-radius: 10px;
+                backdrop-filter: blur(20px);
+                background: linear-gradient(90deg, rgba(0, 123, 255, 0.511), rgba(0, 166, 255, 0.511));
+            }
         }
 
         /* Animations */
@@ -214,62 +412,80 @@
             to { opacity: 1; }
         }
 
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 1.5rem; }
-            .name-input input { font-size: 1rem; }
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="/index.html">Home</a>
-    </div>
+    <nav class="navbar">
+        <div class="container">
+            <h1>DART</h1>
+            <div class="hamburger">&#9776;</div>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/disasters.html">Disasters</a></li>
+                <li><a href="/courses.html">Courses</a></li>
+                <li><a href="/prepare.html">Prepare</a></li>
+                <li><a href="/faq.html">FAQ</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="#" id="darkModeToggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i> Dark Mode
+                </a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- Main Container -->
-    <div class="container">
+    <div class="main-container">
         <h1>Course Title: Disaster Management 101</h1>
         <p>Watch the full video to unlock the quiz. Score 75% or above to get your certificate.</p>
-        <video id="course-video" width="600" height="400" controls playsinline>
+        
+        <video id="course-video" controls playsinline>
             <source src="/images/disaster preparedness.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
         <div id="quiz-section">
-            <h2>Quiz</h2>
             <form id="quiz-form">
+                <!-- Add your quiz questions here -->
                 <div class="question">
-                    <p>1. What is the first step in disaster management?</p>
-                    <label><input type="radio" name="q1" value="a"> a) Response</label>
-                    <label><input type="radio" name="q1" value="b"> b) Recovery</label>
-                    <label><input type="radio" name="q1" value="c"> c) Preparedness</label>
-                    <label><input type="radio" name="q1" value="d"> d) Mitigation</label>
+                    <p>1. What is defined as a serious disruption of community or society functioning?</p>
+                    <label><input type="radio" name="q1" value="a"> a) Emergency</label>
+                    <label><input type="radio" name="q1" value="b"> b) Disaster</label>
+                    <label><input type="radio" name="q1" value="c"> c) Catastrophe</label>
+                    <label><input type="radio" name="q1" value="d"> d) Crisis</label>
                 </div>
                 <div class="question">
-                    <p>2. Which of the following is NOT a type of natural disaster?</p>
-                    <label><input type="radio" name="q2" value="a"> a) Earthquake</label>
-                    <label><input type="radio" name="q2" value="b"> b) Hurricane</label>
-                    <label><input type="radio" name="q2" value="c"> c) Wildfire</label>
-                    <label><input type="radio" name="q2" value="d"> d) Cybercrime</label>
+                    <p>2. Which of the following is NOT a component of disaster management?</p>
+                    <label><input type="radio" name="q2" value="a"> a) Preparedness</label>
+                    <label><input type="radio" name="q2" value="b"> b) Recovery</label>
+                    <label><input type="radio" name="q2" value="c"> c) Response</label>
+                    <label><input type="radio" name="q2" value="d"> d) Evaluation</label>
                 </div>
                 <div class="question">
-                    <p>3. What should be included in a basic emergency kit?</p>
-                    <label><input type="radio" name="q3" value="a"> a) Water and non-perishable food</label>
-                    <label><input type="radio" name="q3" value="b"> b) Flashlight and batteries</label>
-                    <label><input type="radio" name="q3" value="c"> c) First aid supplies</label>
-                    <label><input type="radio" name="q3" value="d"> d) All of the above</label>
+                    <p>3. The Disaster Management Act was enacted in which year?</p>
+                    <label><input type="radio" name="q3" value="a"> a) 2000</label>
+                    <label><input type="radio" name="q3" value="b"> b) 2005</label>
+                    <label><input type="radio" name="q3" value="c"> c) 2010</label>
+                    <label><input type="radio" name="q3" value="d"> d) 2015</label>
                 </div>
                 <div class="question">
                     <p>4. Which agency oversees disaster management in the U.S.?</p>
@@ -323,20 +539,20 @@
                     <label><input type="radio" name="q10" value="c"> c)  Gather outside with neighbors radios</label>
                     <label><input type="radio" name="q10" value="d"> d) Crawl low under the smoke to exit </label>
                 </div>
-                <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+                <button type="button" class="submit-button" onclick="submitQuiz()">Submit Quiz</button>
             </form>
         </div>
 
-        <div id="name-input" class="name-input">
-            <input type="text" id="user-name" placeholder="Enter your name to generate the certificate">
+        <div id="name-input">
+            <input type="text" id="user-name" placeholder="Enter your name for the certificate">
             <button onclick="generateCertificate()">Generate Certificate</button>
         </div>
 
-        <button id="certificate-btn" onclick="showNameInput()">Download Certificate</button>
-        <button id="go-back-btn" onclick="goBack()">Go Back</button>
+        <button id="certificate-btn" onclick="showNameInput()" style="display: none;">Download Certificate</button>
+        <button id="go-back-btn" onclick="goBack()" style="display: none;">Go Back</button>
     </div>
 
-    <!-- The Modal (Advertisement Style) -->
+    <!-- Success Modal -->
     <div id="quizModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -346,27 +562,38 @@
         </div>
     </div>
 
+    <!-- Failure Modal -->
     <div id="quizModal2" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>You scored below 75%. </h2>
-            <p>try again to be prepared for any disaster!</p>
+            <span class="close-btn" onclick="closeModal2()">&times;</span>
+            <h2>Score Below 75%</h2>
+            <p>Please try again to be better prepared for disasters!</p>
             <button onclick="closeModal2()">Try Again</button>
         </div>
     </div>
 
-
+    <!-- Include jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
+        // Constants
         const video = document.getElementById('course-video');
         const quizSection = document.getElementById('quiz-section');
+    
+
         const certificateBtn = document.getElementById('certificate-btn');
         const goBackBtn = document.getElementById('go-back-btn');
         const nameInputDiv = document.getElementById('name-input');
         const quizModal = document.getElementById('quizModal');
-        
+        const quizModal2 = document.getElementById('quizModal2');
+
         let certificateGenerated = false;
 
+        // Hide certificate elements initially
+        certificateBtn.style.display = 'none';
+        nameInputDiv.style.display = 'none';
+
+        // Show quiz when video ends
         video.onended = function() {
             quizSection.style.display = 'block';
             goBackBtn.style.display = 'inline-block';
@@ -374,10 +601,11 @@
 
         function submitQuiz() {
             const form = document.getElementById('quiz-form');
-            const answers = ['c', 'd', 'd', 'a', 'c', 'c', 'c', 'b', 'a', ];
+            const answers = ['c', 'd', 'd', 'a', 'c', 'c', 'c', 'b', 'a', 'd'];
             let score = 0;
 
-            for (let i = 1; i <= 4; i++) {
+            // Calculate score
+            for (let i = 1; i <= 10; i++) {
                 const selectedAnswer = form.elements['q' + i].value;
                 if (selectedAnswer === answers[i - 1]) {
                     score++;
@@ -388,8 +616,10 @@
             
             if (percentage >= 75) {
                 openModal();
+                certificateBtn.style.display = 'inline-block'; // Show certificate button
             } else {
-                openModal2();            }
+                openModal2();
+            }
         }
 
         function showNameInput() {
@@ -400,7 +630,7 @@
         function openModal() {
             quizModal.style.display = 'block';
         }
-        
+
         function openModal2() {
             quizModal2.style.display = 'block';
         }
@@ -408,10 +638,10 @@
         function closeModal() {
             quizModal.style.display = 'none';
         }
-        
+
         function closeModal2() {
-            quizModal.style.display = 'none';
-            window.location.reload()
+            quizModal2.style.display = 'none';
+            window.location.reload();
         }
 
         function generateCertificate() {
@@ -446,6 +676,45 @@
         function goBack() {
             window.history.back();
         }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.querySelector('#darkModeToggle i');
+            
+            // Toggle dark mode class
+            body.classList.toggle('dark-mode');
+            
+            // Update icon
+            if (body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Check for saved dark mode preference
+        function checkDarkMode() {
+            const darkMode = localStorage.getItem('darkMode');
+            const icon = document.querySelector('#darkModeToggle i');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        // Call checkDarkMode when page loads
+        document.addEventListener('DOMContentLoaded', checkDarkMode);
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
     </script>
 </body>
 </html>

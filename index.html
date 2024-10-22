@@ -89,13 +89,13 @@
         </section>
 
         <section id="disaster-map" class="section disaster-map">
-            <div class="container">
-                <h3>Disaster Risk Map</h3>
-                <div class="map-container">
-                    <!-- Placeholder for an interactive map -->
-                    <img src="/images/Map.jpg" alt="Disaster Risk Map of India" width="25vh" height="auto"/>
-                </div>
-                <p>View the current disaster risk levels across different regions of India.</p>
+            <div class="map-container" style="position: relative; overflow: hidden; padding-top: 56.25%;">
+                <iframe 
+                    src="https://maps.disasters.nasa.gov/arcgis/apps/MapSeries/index.html?appid=ab7723584fe847449faaa2e62d3bef74"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                    title="NASA Disaster Map"
+                    allowfullscreen>
+                </iframe>
             </div>
         </section>
 
