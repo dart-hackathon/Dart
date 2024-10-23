@@ -458,13 +458,28 @@
         <h1>Course Title: Disaster Management 101</h1>
         <p>Watch the full video to unlock the quiz. Score 75% or above to get your certificate.</p>
         
-        <video id="course-video" controls playsinline>
-            <source src="/images/disaster preparedness.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <!-- Modified video container -->
+        <div id="video-container">
+            <div id="course-video"></div>
+        </div>
+        
+        <iframe 
+        id="course-video"
+        width="100%" 
+        height="500"
+        src="https://www.youtube.com/embed/_6ri7oZ6-k4?si=vFO9xlRjo1lFSx8o"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+        </iframe>
 
-        <div id="quiz-section">
-            <form id="quiz-form">
+        <div id="video-container">
+            <div id="course-video"></div>
+            <div id="video-overlay" style="display: none;">
+                <p>Video completed! You can now take the quiz below.</p>
+            </div>
+
+            <div id="quiz-section" style="display: none;">
                 <!-- Add your quiz questions here -->
                 <div class="question">
                     <p>1. What is defined as a serious disruption of community or society functioning?</p>
@@ -574,147 +589,149 @@
 
     <!-- Include jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        // Constants
-        const video = document.getElementById('course-video');
         const quizSection = document.getElementById('quiz-section');
-    
+const certificateBtn = document.getElementById('certificate-btn');
+const goBackBtn = document.getElementById('go-back-btn');
+const nameInputDiv = document.getElementById('name-input');
+const quizModal = document.getElementById('quizModal');
+const quizModal2 = document.getElementById('quizModal2');
 
-        const certificateBtn = document.getElementById('certificate-btn');
-        const goBackBtn = document.getElementById('go-back-btn');
-        const nameInputDiv = document.getElementById('name-input');
-        const quizModal = document.getElementById('quizModal');
-        const quizModal2 = document.getElementById('quizModal2');
+let player;
+let videoCompleted = false;
 
-        let certificateGenerated = false;
+// Load YouTube API when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadYouTubeAPI();
+    checkDarkMode();
+});
 
-        // Hide certificate elements initially
-        certificateBtn.style.display = 'none';
-        nameInputDiv.style.display = 'none';
+function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
 
-        // Show quiz when video ends
-        video.onended = function() {
-            quizSection.style.display = 'block';
-            goBackBtn.style.display = 'inline-block';
-        };
-
-        function submitQuiz() {
-            const form = document.getElementById('quiz-form');
-            const answers = ['c', 'd', 'd', 'a', 'c', 'c', 'c', 'b', 'a', 'd'];
-            let score = 0;
-
-            // Calculate score
-            for (let i = 1; i <= 10; i++) {
-                const selectedAnswer = form.elements['q' + i].value;
-                if (selectedAnswer === answers[i - 1]) {
-                    score++;
-                }
-            }
-
-            const percentage = (score / 10) * 100;
-            
-            if (percentage >= 75) {
-                openModal();
-                certificateBtn.style.display = 'inline-block'; // Show certificate button
-            } else {
-                openModal2();
-            }
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('course-video', {
+        height: '500',
+        width: '100%',
+        videoId: '_6ri7oZ6-k4', // Your video ID
+        playerVars: {
+            'autoplay': 0,
+            'controls': 1,
+            'rel': 0
+        },
+        events: {
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
         }
+    });
+}
 
-        function showNameInput() {
-            nameInputDiv.style.display = 'block';
-            certificateBtn.style.display = 'none';
-        }
-
-        function openModal() {
-            quizModal.style.display = 'block';
-        }
-
-        function openModal2() {
-            quizModal2.style.display = 'block';
-        }
-
-        function closeModal() {
-            quizModal.style.display = 'none';
-        }
-
-        function closeModal2() {
-            quizModal2.style.display = 'none';
-            window.location.reload();
-        }
-
-        function generateCertificate() {
-            if (certificateGenerated) {
-                alert('You have already generated your certificate.');
-                return;
-            }
-
-            const userName = document.getElementById('user-name').value;
-
-            if (userName.trim() === '') {
-                alert('Please enter your name to generate the certificate.');
-                return;
-            }
-
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            const img = new Image();
-            img.src = '/images/certificate.png';
-
-            img.onload = function() {
-                doc.addImage(img, 'JPEG', 0, 0, 210, 297);
-                doc.setFontSize(24);
-                doc.setTextColor(50, 50, 50);
-                doc.text(userName, 105, 150, null, null, 'center');
-                doc.save('Certificate-' + userName + '.pdf');
-                certificateGenerated = true;
-            };
-        }
-
-        function goBack() {
-            window.history.back();
-        }
-
-        function toggleDarkMode() {
-            const body = document.body;
-            const icon = document.querySelector('#darkModeToggle i');
-            
-            // Toggle dark mode class
-            body.classList.toggle('dark-mode');
-            
-            // Update icon
-            if (body.classList.contains('dark-mode')) {
-                icon.className = 'fas fa-sun';
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                icon.className = 'fas fa-moon';
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        }
-
-        // Check for saved dark mode preference
-        function checkDarkMode() {
-            const darkMode = localStorage.getItem('darkMode');
-            const icon = document.querySelector('#darkModeToggle i');
-            
-            if (darkMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                icon.className = 'fas fa-sun';
-            }
-        }
-
-        // Call checkDarkMode when page loads
-        document.addEventListener('DOMContentLoaded', checkDarkMode);
-
-        // Mobile menu toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.navbar ul');
-
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED && !videoCompleted) {
+        videoCompleted = true;
+        quizSection.style.display = 'block';
+        goBackBtn.style.display = 'inline-block';
+        quizSection.scrollIntoView({ 
+            behavior: 'smooth' 
         });
+    }
+}
+
+function onPlayerError(event) {
+    console.error('YouTube Player Error:', event.data);
+}
+
+// Hide certificate elements initially
+certificateBtn.style.display = 'none';
+nameInputDiv.style.display = 'none';
+
+function submitQuiz() {
+    const answers = ['c', 'd', 'd', 'a', 'c', 'c', 'c', 'b', 'a', 'd'];
+    let score = 0;
+
+    // Calculate score
+    for (let i = 1; i <= 10; i++) {
+        const selectedAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selectedAnswer && selectedAnswer.value === answers[i - 1]) {
+            score++;
+        }
+    }
+
+    const percentage = (score / 10) * 100;
+    
+    if (percentage >= 75) {
+        openModal();
+        certificateBtn.style.display = 'inline-block'; // Show certificate button
+    } else {
+        openModal2();
+    }
+}
+
+function openModal() {
+    quizModal.style.display = 'block';
+}
+
+function openModal2() {
+    quizModal2.style.display = 'block';
+}
+
+function closeModal() {
+    quizModal.style.display = 'none';
+}
+
+function closeModal2() {
+    quizModal2.style.display = 'none';
+    window.location.reload();
+}
+
+function showNameInput() {
+    nameInputDiv.style.display = 'block';
+    certificateBtn.style.display = 'none';
+}
+
+function toggleDarkMode() {
+    const body = document.body;
+    const icon = document.querySelector('#darkModeToggle i');
+    
+    // Toggle dark mode class
+    body.classList.toggle('dark-mode');
+    
+    // Update icon
+    if (body.classList.contains('dark-mode')) {
+        icon.className = 'fas fa-sun';
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        icon.className = 'fas fa-moon';
+        localStorage.setItem('darkMode', 'disabled');
+    }
+}
+
+function checkDarkMode() {
+    const darkMode = localStorage.getItem('darkMode');
+    const icon = document.querySelector('#darkModeToggle i');
+    
+    if (darkMode === 'enabled') {
+        document.body.classList.add('dark-mode');
+        icon.className = 'fas fa-sun';
+    }
+}
+
+// Call checkDarkMode when page loads
+document.addEventListener('DOMContentLoaded', checkDarkMode);
+
+// Mobile menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.navbar ul');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
     </script>
 </body>
 </html>
